@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Muhammad Shayan — AI-Assisted Web Developer &amp; Digital Marketing Specialist</title>
+<meta name="description" content="Muhammad Shayan — Founder of The Readyfy. AI-assisted web development, Shopify infrastructure, and conversion-driven digital marketing." />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#050505',
+          navy: { DEFAULT: '#0A1226', light: '#0E1A36', border: '#16213F' },
+          blue: { DEFAULT: '#2F6FFF', soft: '#5C8CFF', dim: '#13235A' },
+          gold: { DEFAULT: '#CDA45E', soft: '#E2C386', dim: '#3A2E16' },
+          bone: '#F4F2EC',
+          mute: '#8B92A6',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          body: ['Inter', 'sans-serif'],
+          mono: ['JetBrains Mono', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { background-color: #050505; }
+
+  ::selection { background: #2F6FFF; color: #050505; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #050505; }
+  ::-webkit-scrollbar-thumb { background: #16213F; border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover { background: #2F6FFF; }
+
+  /* Blueprint grid background */
+  .blueprint {
+    background-image:
+      linear-gradient(rgba(47,111,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(47,111,255,0.07) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .blueprint-fade {
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 10%, transparent 75%);
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 10%, transparent 75%);
+  }
+
+  /* split underline accent */
+  .split-accent {
+    background: linear-gradient(90deg, #2F6FFF 0%, #2F6FFF 48%, #CDA45E 52%, #CDA45E 100%);
+  }
+
+  .glass-nav {
+    background: rgba(5,5,5,0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  /* reveal-on-scroll */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(.16,.84,.44,1), transform 0.8s cubic-bezier(.16,.84,.44,1); }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+  .status-dot {
+    box-shadow: 0 0 0 0 rgba(94, 234, 140, 0.55);
+    animation: pulse-dot 2.2s infinite;
+  }
+  @keyframes pulse-dot {
+    0% { box-shadow: 0 0 0 0 rgba(94,234,140,0.5); }
+    70% { box-shadow: 0 0 0 9px rgba(94,234,140,0); }
+    100% { box-shadow: 0 0 0 0 rgba(94,234,140,0); }
+  }
+
+  .card-hover { transition: transform 0.45s cubic-bezier(.16,.84,.44,1), border-color 0.45s ease, box-shadow 0.45s ease; }
+  .card-hover:hover { transform: translateY(-6px); }
+
+  .mockup-glow::before {
+    content: '';
+    position: absolute; inset: -1px;
+    background: linear-gradient(135deg, rgba(47,111,255,0.35), rgba(205,164,94,0.0) 60%);
+    opacity: 0; transition: opacity .5s ease;
+    border-radius: inherit;
+  }
+  .mockup-glow:hover::before { opacity: 1; }
+
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: ''; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px;
+    background: #2F6FFF; transition: width .35s cubic-bezier(.16,.84,.44,1);
+  }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+  textarea, input { background-color: #0A1226; }
+  input:focus, textarea:focus { outline: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .status-dot { animation: none; }
+  }
+</style>
+</head>
+
+<body class="bg-ink text-bone font-body antialiased selection:bg-blue">
+
+  <!-- ============ NAV ============ -->
+  <header id="top" class="fixed top-0 inset-x-0 z-50 glass-nav border-b border-navy-border/0 transition-colors">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="flex items-center justify-between h-20">
+        <a href="#top" class="flex items-center gap-2 group">
+          <span class="font-display text-2xl tracking-tight">
+            <span class="text-bone">MS</span><span class="text-gold">.</span>
+          </span>
+          <span class="hidden sm:block w-px h-5 bg-navy-border mx-1"></span>
+          <span class="hidden sm:block font-mono text-[11px] tracking-widest text-mute uppercase">Shayan</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-10 font-mono text-xs tracking-widest uppercase">
+          <a href="#skills" class="nav-link text-bone/80 hover:text-bone transition-colors">Skills</a>
+          <a href="#experience" class="nav-link text-bone/80 hover:text-bone transition-colors">Experience</a>
+          <a href="#work" class="nav-link text-bone/80 hover:text-bone transition-colors">Work</a>
+          <a href="#contact" class="nav-link text-bone/80 hover:text-bone transition-colors">Contact</a>
+        </nav>
+
+        <a href="#contact" class="hidden md:inline-flex items-center gap-2 border border-blue/50 text-bone hover:bg-blue hover:text-ink px-5 py-2.5 font-mono text-xs uppercase tracking-widest transition-all duration-300">
+          Start a project
+          <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </a>
+
+        <button id="menuBtn" aria-label="Toggle menu" aria-expanded="false" class="md:hidden text-bone text-xl w-10 h-10 flex items-center justify-center border border-navy-border">
+          <i class="fa-solid fa-bars" id="menuIcon"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-navy-border bg-ink/98">
+      <div class="px-6 py-6 flex flex-col gap-5 font-mono text-sm uppercase tracking-widest">
+        <a href="#skills" class="mobile-link text-bone/90 hover:text-blue transition-colors">Skills</a>
+        <a href="#experience" class="mobile-link text-bone/90 hover:text-blue transition-colors">Experience</a>
+        <a href="#work" class="mobile-link text-bone/90 hover:text-blue transition-colors">Work</a>
+        <a href="#contact" class="mobile-link text-bone/90 hover:text-blue transition-colors">Contact</a>
+        <a href="#contact" class="mobile-link inline-flex items-center justify-center gap-2 border border-blue text-bone px-5 py-3 mt-2">
+          Start a project <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden">
+    <div class="absolute inset-0 blueprint blueprint-fade pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-[42rem] h-[42rem] bg-blue/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-gold/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-10 w-full">
+      <div class="reveal flex items-center gap-3 mb-8">
+        <span class="relative flex h-2 w-2">
+          <span class="status-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+        </span>
+        <span class="font-mono text-xs tracking-[0.25em] text-mute uppercase">Available for select projects — Karachi, PK</span>
+      </div>
+
+      <h1 class="reveal font-display font-light leading-[0.98] text-[15vw] sm:text-7xl md:text-8xl lg:text-[7.2rem] tracking-tight">
+        Muhammad
+        <span class="block italic font-normal bg-gradient-to-r from-blue via-blue-soft to-gold bg-clip-text text-transparent">Shayan</span>
+      </h1>
+
+      <div class="reveal w-40 h-[3px] split-accent mt-8 mb-8"></div>
+
+      <p class="reveal max-w-2xl text-lg sm:text-xl text-mute leading-relaxed font-light">
+        I build <span class="text-bone font-normal">high-converting Shopify stores</span> and modern digital infrastructure for premium brands — engineered through <span class="text-bone font-normal">AI-assisted development workflows</span> and sharpened by data-driven marketing. Founder, <span class="text-gold">The Readyfy</span>.
+      </p>
+
+      <div class="reveal flex flex-wrap items-center gap-5 mt-12">
+        <a href="#work" class="group relative inline-flex items-center gap-3 bg-blue text-ink px-8 py-4 font-mono text-xs uppercase tracking-widest font-semibold overflow-hidden">
+          <span class="relative z-10">View Work</span>
+          <i class="fa-solid fa-arrow-right relative z-10 text-[11px] transition-transform duration-300 group-hover:translate-x-1"></i>
+          <span class="absolute inset-0 bg-gold scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+        </a>
+        <a href="#contact" class="inline-flex items-center gap-3 border border-navy-border hover:border-gold/60 text-bone px-8 py-4 font-mono text-xs uppercase tracking-widest transition-colors duration-300">
+          Get in touch
+        </a>
+      </div>
+
+      <div class="reveal grid grid-cols-3 sm:flex sm:items-center gap-x-10 gap-y-6 mt-20 pt-8 border-t border-navy-border max-w-2xl font-mono text-xs uppercase tracking-widest text-mute">
+        <div><span class="block text-bone text-base font-medium mb-1">Shopify</span>Infrastructure</div>
+        <div><span class="block text-bone text-base font-medium mb-1">AI-Assisted</span>Development</div>
+        <div><span class="block text-bone text-base font-medium mb-1">Meta Ads</span>&amp; CRO</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills" class="relative py-32 border-t border-navy-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="reveal flex items-end justify-between flex-wrap gap-6 mb-16">
+        <div>
+          <span class="font-mono text-xs tracking-[0.3em] text-blue uppercase">// 01 — Capabilities</span>
+          <h2 class="font-display text-4xl sm:text-5xl mt-4">The Stack</h2>
+        </div>
+        <p class="max-w-sm text-mute font-light text-sm leading-relaxed">Three disciplines, one workflow — development, growth, and the automation that connects them.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Card 1 -->
+        <div class="reveal card-hover group relative bg-navy/40 border border-navy-border hover:border-blue/50 p-8 lg:p-10">
+          <div class="flex items-center justify-between mb-10">
+            <div class="w-14 h-14 rounded-full bg-blue-dim flex items-center justify-center text-blue text-xl">
+              <i class="fa-solid fa-microchip"></i>
+            </div>
+            <span class="font-mono text-xs text-mute">01</span>
+          </div>
+          <h3 class="font-display text-2xl mb-1">AI &amp; Development</h3>
+          <p class="text-mute text-sm mb-8 font-light">Building the engine behind every store.</p>
+          <ul class="space-y-4 font-mono text-sm">
+            <li class="flex items-center gap-3"><i class="fa-solid fa-chevron-right text-blue text-[10px]"></i>AI-Assisted Web Development</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-chevron-right text-blue text-[10px]"></i>Shopify Customization</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-chevron-right text-blue text-[10px]"></i>Store Optimization</li>
+          </ul>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="reveal card-hover group relative bg-navy/40 border border-navy-border hover:border-gold/50 p-8 lg:p-10 md:translate-y-6">
+          <div class="flex items-center justify-between mb-10">
+            <div class="w-14 h-14 rounded-full bg-gold-dim flex items-center justify-center text-gold text-xl">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <span class="font-mono text-xs text-mute">02</span>
+          </div>
+          <h3 class="font-display text-2xl mb-1">Marketing &amp; Strategy</h3>
+          <p class="text-mute text-sm mb-8 font-light">Turning traffic into revenue.</p>
+          <ul class="space-y-4 font-mono text-sm">
+            <li class="flex items-center gap-3"><i class="fa-solid fa-chevron-right text-gold text-[10px]"></i>Meta Ads</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-chevron-right text-gold text-[10px]"></i>Digital Marketing</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-chevron-right text-gold text-[10px]"></i>Conversion Rate Optimization</li>
+          </ul>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="reveal card-hover group relative bg-navy/40 border border-navy-border hover:border-blue/50 p-8 lg:p-10">
+          <div class="flex items-center justify-between mb-10">
+            <div class="w-14 h-14 rounded-full bg-blue-dim flex items-center justify-center text-blue text-xl">
+              <i class="fa-solid fa-database"></i>
+            </div>
+            <span class="font-mono text-xs text-mute">03</span>
+          </div>
+          <h3 class="font-display text-2xl mb-1">Data &amp; Automation</h3>
+          <p class="text-mute text-sm mb-8 font-light">Infrastructure that runs itself.</p>
+          <ul class="space-y-4 font-mono text-sm">
+            <li class="flex items-center gap-3"><i class="fa-solid fa-chevron-right text-blue text-[10px]"></i>Automated Data Scraping</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-chevron-right text-blue text-[10px]"></i>Database Management</li>
+            <li class="flex items-center gap-3"><i class="fa-solid fa-chevron-right text-blue text-[10px]"></i>Workflow Automation</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience" class="relative py-32 border-t border-navy-border bg-navy/20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="reveal mb-20">
+        <span class="font-mono text-xs tracking-[0.3em] text-gold uppercase">// 02 — Track Record</span>
+        <h2 class="font-display text-4xl sm:text-5xl mt-4">Experience</h2>
+      </div>
+
+      <div class="relative max-w-4xl">
+        <div class="absolute left-[7px] sm:left-[11px] top-2 bottom-2 w-px bg-navy-border"></div>
+
+        <!-- item 1 -->
+        <div class="reveal relative pl-10 sm:pl-14 pb-16">
+          <span class="absolute left-0 top-1.5 w-[15px] h-[15px] sm:w-[23px] sm:h-[23px] rounded-full bg-ink border-2 border-blue flex items-center justify-center">
+            <span class="w-[6px] h-[6px] rounded-full bg-blue"></span>
+          </span>
+          <span class="font-mono text-xs text-blue uppercase tracking-widest">Current</span>
+          <h3 class="font-display text-2xl sm:text-3xl mt-2">Manager</h3>
+          <p class="text-gold font-mono text-sm mt-1 mb-4">The Readyfy — Founder-Operator</p>
+          <p class="text-mute font-light leading-relaxed max-w-xl">
+            Overseeing operations end-to-end — managing project timelines, client delivery, and building the e-commerce infrastructure that powers every store under The Readyfy.
+          </p>
+        </div>
+
+        <!-- item 2 -->
+        <div class="reveal relative pl-10 sm:pl-14 pb-16">
+          <span class="absolute left-0 top-1.5 w-[15px] h-[15px] sm:w-[23px] sm:h-[23px] rounded-full bg-ink border-2 border-gold flex items-center justify-center">
+            <span class="w-[6px] h-[6px] rounded-full bg-gold"></span>
+          </span>
+          <span class="font-mono text-xs text-mute uppercase tracking-widest">Prior Role</span>
+          <h3 class="font-display text-2xl sm:text-3xl mt-2">Data Scraper Agent</h3>
+          <p class="text-gold font-mono text-sm mt-1 mb-4">Urban Grid Solution</p>
+          <p class="text-mute font-light leading-relaxed max-w-xl">
+            Engineered automated scraping workflows, handled large-scale data cleaning, and maintained reliable pipelines for ongoing data delivery.
+          </p>
+        </div>
+
+        <!-- item 3 -->
+        <div class="reveal relative pl-10 sm:pl-14">
+          <span class="absolute left-0 top-1.5 w-[15px] h-[15px] sm:w-[23px] sm:h-[23px] rounded-full bg-ink border-2 border-navy-border flex items-center justify-center">
+            <span class="w-[6px] h-[6px] rounded-full bg-mute"></span>
+          </span>
+          <span class="font-mono text-xs text-mute uppercase tracking-widest">Prior Role</span>
+          <h3 class="font-display text-2xl sm:text-3xl mt-2">E-Commerce Assistant</h3>
+          <p class="text-gold font-mono text-sm mt-1 mb-4">Independent / Client Work</p>
+          <p class="text-mute font-light leading-relaxed max-w-xl">
+            Managed Shopify storefronts, product listings, and Meta Ad campaigns — laying the groundwork for what became The Readyfy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="work" class="relative py-32 border-t border-navy-border">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="reveal flex items-end justify-between flex-wrap gap-6 mb-16">
+        <div>
+          <span class="font-mono text-xs tracking-[0.3em] text-blue uppercase">// 03 — Selected Work</span>
+          <h2 class="font-display text-4xl sm:text-5xl mt-4">Featured Projects</h2>
+        </div>
+        <p class="max-w-sm text-mute font-light text-sm leading-relaxed">Premium storefronts engineered for conversion, not just appearance.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Project 1 -->
+        <article class="reveal mockup-glow card-hover group relative bg-navy/40 border border-navy-border hover:border-blue/40 overflow-hidden">
+          <div class="relative h-56 bg-gradient-to-br from-navy-light to-ink p-5 overflow-hidden border-b border-navy-border">
+            <div class="flex items-center gap-1.5 mb-4">
+              <span class="w-2.5 h-2.5 rounded-full bg-navy-border"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-navy-border"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-navy-border"></span>
+            </div>
+            <div class="space-y-2.5">
+              <div class="h-3 w-2/3 bg-blue/30 rounded-sm"></div>
+              <div class="h-2 w-5/6 bg-bone/10 rounded-sm"></div>
+              <div class="h-2 w-1/2 bg-bone/10 rounded-sm"></div>
+              <div class="flex gap-2 pt-3">
+                <div class="h-16 w-1/3 bg-bone/5 border border-navy-border rounded-sm"></div>
+                <div class="h-16 w-1/3 bg-bone/5 border border-navy-border rounded-sm"></div>
+                <div class="h-16 w-1/3 bg-bone/5 border border-navy-border rounded-sm"></div>
+              </div>
+            </div>
+            <i class="fa-solid fa-bag-shopping absolute bottom-4 right-4 text-3xl text-blue/20"></i>
+          </div>
+          <div class="p-7">
+            <span class="font-mono text-[11px] uppercase tracking-widest text-blue">Premium E-Commerce UX/UI</span>
+            <h3 class="font-display text-2xl mt-2 mb-3">PureLuna Store</h3>
+            <p class="text-mute font-light text-sm leading-relaxed mb-6">A refined Shopify experience built around clarity and product storytelling — engineered for smooth, intuitive purchasing journeys.</p>
+            <span class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-bone/70 group-hover:text-blue transition-colors">
+              View Case Study <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </span>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="reveal mockup-glow card-hover group relative bg-navy/40 border border-navy-border hover:border-gold/40 overflow-hidden md:translate-y-6">
+          <div class="relative h-56 bg-gradient-to-br from-navy-light to-ink p-5 overflow-hidden border-b border-navy-border">
+            <div class="flex items-center gap-1.5 mb-4">
+              <span class="w-2.5 h-2.5 rounded-full bg-navy-border"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-navy-border"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-navy-border"></span>
+            </div>
+            <div class="flex justify-center pt-3">
+              <div class="h-10 w-10 rounded-full border border-gold/40 flex items-center justify-center">
+                <i class="fa-solid fa-gem text-gold text-sm"></i>
+              </div>
+            </div>
+            <div class="space-y-2.5 mt-5">
+              <div class="h-2.5 w-1/2 bg-gold/30 rounded-sm mx-auto"></div>
+              <div class="h-2 w-2/3 bg-bone/10 rounded-sm mx-auto"></div>
+            </div>
+            <i class="fa-solid fa-crown absolute bottom-4 right-4 text-3xl text-gold/20"></i>
+          </div>
+          <div class="p-7">
+            <span class="font-mono text-[11px] uppercase tracking-widest text-gold">Luxury Shopify Setup</span>
+            <h3 class="font-display text-2xl mt-2 mb-3">MAISON-CLAT</h3>
+            <p class="text-mute font-light text-sm leading-relaxed mb-6">A high-end brand store built from the ground up — minimal layout, elevated typography, and a checkout experience that matches the product's price point.</p>
+            <span class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-bone/70 group-hover:text-gold transition-colors">
+              View Case Study <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </span>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="reveal mockup-glow card-hover group relative bg-navy/40 border border-navy-border hover:border-blue/40 overflow-hidden">
+          <div class="relative h-56 bg-gradient-to-br from-navy-light to-ink p-5 overflow-hidden border-b border-navy-border">
+            <div class="flex items-center gap-1.5 mb-4">
+              <span class="w-2.5 h-2.5 rounded-full bg-navy-border"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-navy-border"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-navy-border"></span>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <div class="h-20 bg-bone/5 border border-navy-border rounded-sm"></div>
+              <div class="h-20 bg-blue/10 border border-blue/20 rounded-sm flex items-center justify-center">
+                <i class="fa-solid fa-bolt text-blue text-xs"></i>
+              </div>
+              <div class="h-20 bg-bone/5 border border-navy-border rounded-sm"></div>
+            </div>
+            <i class="fa-solid fa-scissors absolute bottom-4 right-4 text-3xl text-blue/20"></i>
+          </div>
+          <div class="p-7">
+            <span class="font-mono text-[11px] uppercase tracking-widest text-blue">Conversion-Optimized Brand Store</span>
+            <h3 class="font-display text-2xl mt-2 mb-3">LUXE-LOCKS</h3>
+            <p class="text-mute font-light text-sm leading-relaxed mb-6">A performance-first storefront — structured around CRO principles, fast load paths, and a funnel tuned for paid traffic.</p>
+            <span class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-bone/70 group-hover:text-blue transition-colors">
+              View Case Study <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="relative py-32 border-t border-navy-border bg-navy/20 overflow-hidden">
+    <div class="absolute -bottom-32 -right-32 w-[34rem] h-[34rem] bg-blue/10 rounded-full blur-[160px] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 relative">
+      <div class="reveal mb-16">
+        <span class="font-mono text-xs tracking-[0.3em] text-gold uppercase">// 04 — Let's Talk</span>
+        <h2 class="font-display text-4xl sm:text-5xl mt-4">Start the Build</h2>
+        <p class="text-mute font-light max-w-lg mt-4">Have a store that needs to convert better, or a project that needs modern infrastructure? Tell me about it.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-5 gap-12 lg:gap-16">
+
+        <!-- info -->
+        <div class="reveal lg:col-span-2 space-y-10">
+          <div>
+            <span class="font-mono text-xs uppercase tracking-widest text-mute">Email</span>
+            <a href="mailto:shayankamran7@gmail.com" class="flex items-center gap-3 mt-2 text-lg hover:text-blue transition-colors group">
+              <i class="fa-solid fa-envelope text-blue w-5"></i>
+              <span class="break-all">shayankamran7@gmail.com</span>
+            </a>
+          </div>
+          <div>
+            <span class="font-mono text-xs uppercase tracking-widest text-mute">Phone</span>
+            <a href="tel:+923131009616" class="flex items-center gap-3 mt-2 text-lg hover:text-blue transition-colors">
+              <i class="fa-solid fa-phone text-blue w-5"></i>
+              0313-1009616
+            </a>
+          </div>
+          <div>
+            <span class="font-mono text-xs uppercase tracking-widest text-mute">Location</span>
+            <p class="flex items-center gap-3 mt-2 text-lg">
+              <i class="fa-solid fa-location-dot text-gold w-5"></i>
+              Karachi, Pakistan
+            </p>
+          </div>
+
+          <div class="pt-6 border-t border-navy-border">
+            <span class="font-mono text-xs uppercase tracking-widest text-mute block mb-4">Find me online</span>
+            <div class="flex items-center gap-3">
+              <a href="#" aria-label="LinkedIn" class="w-11 h-11 flex items-center justify-center border border-navy-border hover:border-blue hover:text-blue transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="#" aria-label="Instagram" class="w-11 h-11 flex items-center justify-center border border-navy-border hover:border-gold hover:text-gold transition-colors"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" aria-label="GitHub" class="w-11 h-11 flex items-center justify-center border border-navy-border hover:border-blue hover:text-blue transition-colors"><i class="fa-brands fa-github"></i></a>
+              <a href="#" aria-label="WhatsApp" class="w-11 h-11 flex items-center justify-center border border-navy-border hover:border-gold hover:text-gold transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- form -->
+        <div class="reveal lg:col-span-3">
+          <form id="contactForm" class="space-y-6">
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="font-mono text-xs uppercase tracking-widest text-mute block mb-2">Name</label>
+                <input type="text" id="name" name="name" required placeholder="Your full name"
+                  class="w-full border border-navy-border focus:border-blue px-4 py-3.5 text-bone placeholder:text-mute/50 transition-colors" />
+              </div>
+              <div>
+                <label for="email" class="font-mono text-xs uppercase tracking-widest text-mute block mb-2">Email</label>
+                <input type="email" id="email" name="email" required placeholder="you@company.com"
+                  class="w-full border border-navy-border focus:border-blue px-4 py-3.5 text-bone placeholder:text-mute/50 transition-colors" />
+              </div>
+            </div>
+            <div>
+              <label for="subject" class="font-mono text-xs uppercase tracking-widest text-mute block mb-2">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What's the project?"
+                class="w-full border border-navy-border focus:border-blue px-4 py-3.5 text-bone placeholder:text-mute/50 transition-colors" />
+            </div>
+            <div>
+              <label for="message" class="font-mono text-xs uppercase tracking-widest text-mute block mb-2">Message</label>
+              <textarea id="message" name="message" rows="5" required placeholder="Tell me a bit about your store or goals..."
+                class="w-full border border-navy-border focus:border-blue px-4 py-3.5 text-bone placeholder:text-mute/50 transition-colors resize-none"></textarea>
+            </div>
+            <button type="submit" class="group relative inline-flex items-center gap-3 bg-blue text-ink px-8 py-4 font-mono text-xs uppercase tracking-widest font-semibold overflow-hidden">
+              <span class="relative z-10" id="submitLabel">Send Message</span>
+              <i class="fa-solid fa-paper-plane relative z-10 text-[11px] transition-transform duration-300 group-hover:translate-x-1"></i>
+              <span class="absolute inset-0 bg-gold scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+            </button>
+            <p id="formNote" class="font-mono text-xs text-mute pt-1"></p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="border-t border-navy-border py-10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="font-mono text-xs text-mute text-center sm:text-left">
+        &copy; <span id="year"></span> Muhammad Shayan — The Readyfy. All rights reserved.
+      </p>
+      <a href="#top" class="font-mono text-xs uppercase tracking-widest text-mute hover:text-blue transition-colors flex items-center gap-2">
+        Back to top <i class="fa-solid fa-arrow-up text-[10px]"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const menuIcon = document.getElementById('menuIcon');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuBtn.setAttribute('aria-expanded', String(!isOpen));
+      menuIcon.classList.toggle('fa-bars');
+      menuIcon.classList.toggle('fa-xmark');
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuIcon.classList.add('fa-bars');
+        menuIcon.classList.remove('fa-xmark');
+      });
+    });
+
+    // Smooth scroll (native CSS handles most, this ensures older browsers + offset)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId.length > 1) {
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            const offset = 80;
+            const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // Active nav link on scroll
+    const sections = ['skills', 'experience', 'work', 'contact'].map(id => document.getElementById(id));
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        const link = document.querySelector(`.nav-link[href="#${id}"]`);
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(sec => { if (sec) navObserver.observe(sec); });
+
+    // Nav background on scroll
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('border-navy-border');
+      } else {
+        header.classList.remove('border-navy-border');
+      }
+    });
+
+    // Contact form (front-end only — opens mail client with prefilled content)
+    const form = document.getElementById('contactForm');
+    const formNote = document.getElementById('formNote');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim() || 'New project inquiry';
+      const message = document.getElementById('message').value.trim();
+
+      const body = `Name: ${name}%0AEmail: ${email}%0A%0A${encodeURIComponent(message)}`;
+      const mailto = `mailto:shayankamran7@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+      window.location.href = mailto;
+      formNote.textContent = 'Opening your email client...';
+      formNote.classList.add('text-blue');
+    });
+  </script>
+
+</body>
+</html>
