@@ -627,6 +627,221 @@
       formNote.classList.add('text-blue');
     });
   </script>
+<!-- ============================================================================
+     SHAYAN AI ASSISTANT — Frontend Chat Widget (Tailwind CSS)
+     ----------------------------------------------------------------------------
+     Iss poore block ko apni index.html mein </body> tag se theek pehle paste
+     karein. Yeh aapki portfolio mein already loaded Tailwind CDN aur
+     Font Awesome ko reuse karta hai — koi extra <script>/<link> add karne ki
+     zaroorat nahi (agar already present hain).
 
+     ⚠️ Sirf ek line update karni hai neeche CONFIG section mein:
+        API_ENDPOINT = "https://shayan-backend-er2ecjdu8-thereadyfy.vercel.app/api/chat"
+     ============================================================================ -->
+
+<!-- ---------- Launcher Button ---------- -->
+<button id="shayan-chat-launcher"
+  aria-label="Open chat with Shayan's assistant"
+  class="fixed bottom-6 right-6 z-[999999] w-[60px] h-[60px] rounded-full
+         bg-gradient-to-br from-[#2F6FFF] to-[#1c4fcc]
+         shadow-[0_8px_28px_rgba(47,111,255,0.45)]
+         hover:shadow-[0_10px_34px_rgba(47,111,255,0.6)]
+         hover:scale-105 transition-all duration-300
+         flex items-center justify-center">
+  <span class="absolute -top-1 -right-1 w-[14px] h-[14px] rounded-full bg-[#CDA45E] border-2 border-[#050505]"></span>
+  <i class="fa-solid fa-comment text-[#050505] text-xl"></i>
+</button>
+
+<!-- ---------- Chat Window ---------- -->
+<div id="shayan-chat-window"
+  class="fixed bottom-[100px] right-6 z-[999999] w-[360px] max-w-[calc(100vw-32px)]
+         h-[500px] max-h-[calc(100vh-140px)]
+         bg-[#0A1226] border border-[#16213F] rounded-2xl
+         shadow-[0_20px_60px_rgba(0,0,0,0.55)]
+         flex flex-col overflow-hidden
+         opacity-0 translate-y-4 scale-[0.97] pointer-events-none
+         transition-all duration-300 ease-out font-[Inter,sans-serif]">
+
+  <!-- Header -->
+  <div class="bg-[#050505] border-b border-[#16213F] px-[18px] py-4 flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#2F6FFF] to-[#CDA45E]
+                  flex items-center justify-center text-[#050505] font-mono font-semibold text-[13px]">
+        MS
+      </div>
+      <div>
+        <div class="text-[#F4F2EC] font-semibold text-sm">Shayan's Assistant</div>
+        <div class="text-[#8B92A6] text-[11px] font-mono flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>Online
+        </div>
+      </div>
+    </div>
+    <button id="shayan-chat-close" aria-label="Close chat"
+      class="w-[30px] h-[30px] rounded-md text-[#8B92A6] hover:text-[#F4F2EC] hover:bg-[#16213F]
+             transition-colors flex items-center justify-center">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <!-- Messages -->
+  <div id="shayan-chat-messages"
+    class="flex-1 overflow-y-auto p-4 flex flex-col gap-3 bg-[#050505]
+           [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-[#16213F] [&::-webkit-scrollbar-thumb]:rounded-full">
+  </div>
+
+  <!-- Input -->
+  <div class="flex items-center gap-2 p-3 bg-[#0A1226] border-t border-[#16213F]">
+    <textarea id="shayan-chat-input" rows="1" placeholder="Apna sawal type karein..."
+      class="flex-1 bg-[#050505] border border-[#16213F] focus:border-[#2F6FFF] outline-none
+             text-[#F4F2EC] placeholder:text-[#8B92A6]/60 text-[13.5px]
+             rounded-[10px] px-3 py-2.5 resize-none transition-colors"></textarea>
+    <button id="shayan-chat-send" aria-label="Send message"
+      class="w-[38px] h-[38px] flex-shrink-0 rounded-[10px] bg-[#2F6FFF] hover:bg-[#CDA45E]
+             transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+      <i class="fa-solid fa-paper-plane text-[#050505] text-sm"></i>
+    </button>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ==========================================================================
+     CONFIG — yahan apna Vercel backend URL daalein
+     ========================================================================== */
+  const CONFIG = {
+    // Apne deploy ke baad mile URL se replace karein, e.g.:
+    // "https://shayan-portfolio-chat-backend.vercel.app/api/chat"
+    API_ENDPOINT: "https://your-project.vercel.app/api/chat",
+
+    welcomeMessage:
+      "Assalam-o-Alaikum! 👋 Main Muhammad Shayan ka AI assistant hoon. Aap mujh se unki services, projects, ya pricing ke baare mein kuch bhi pooch sakte hain.",
+  };
+
+  let conversation = []; // sirf {role, content} — user/assistant. System prompt backend par hai.
+  let isLoading = false;
+  let hasOpenedOnce = false;
+
+  const launcher = document.getElementById("shayan-chat-launcher");
+  const win = document.getElementById("shayan-chat-window");
+  const closeBtn = document.getElementById("shayan-chat-close");
+  const messagesEl = document.getElementById("shayan-chat-messages");
+  const input = document.getElementById("shayan-chat-input");
+  const sendBtn = document.getElementById("shayan-chat-send");
+
+  function appendMessage(text, role) {
+    const bubble = document.createElement("div");
+    const base = "max-w-[82%] px-[13px] py-2.5 rounded-xl text-[13.5px] leading-relaxed whitespace-pre-wrap break-words";
+    if (role === "user") {
+      bubble.className = base + " self-end bg-[#2F6FFF] text-[#050505] font-medium rounded-br-[4px]";
+    } else if (role === "error") {
+      bubble.className = base + " self-start bg-[#3A2E16] text-[#E2C386] border border-[#CDA45E] text-[12.5px]";
+    } else {
+      bubble.className = base + " self-start bg-[#0E1A36] text-[#F4F2EC] border border-[#16213F] rounded-bl-[4px]";
+    }
+    bubble.textContent = text;
+    messagesEl.appendChild(bubble);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function showTyping() {
+    const typing = document.createElement("div");
+    typing.id = "shayan-typing-indicator";
+    typing.className = "self-start flex gap-1 px-3.5 py-3 bg-[#0E1A36] border border-[#16213F] rounded-xl rounded-bl-[4px]";
+    typing.innerHTML = `
+      <span class="w-1.5 h-1.5 rounded-full bg-[#5C8CFF] animate-bounce [animation-delay:0s]"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-[#5C8CFF] animate-bounce [animation-delay:.15s]"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-[#5C8CFF] animate-bounce [animation-delay:.3s]"></span>
+    `;
+    messagesEl.appendChild(typing);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function hideTyping() {
+    const typing = document.getElementById("shayan-typing-indicator");
+    if (typing) typing.remove();
+  }
+
+  async function sendToBackend(userText) {
+    conversation.push({ role: "user", content: userText });
+
+    const res = await fetch(CONFIG.API_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: conversation }),
+    });
+
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.error || `Request failed (${res.status})`);
+    }
+
+    const data = await res.json();
+    if (!data.reply) throw new Error("Empty reply from server");
+    return data.reply;
+  }
+
+  async function handleSend() {
+    const text = input.value.trim();
+    if (!text || isLoading) return;
+
+    appendMessage(text, "user");
+    input.value = "";
+    input.style.height = "auto";
+    isLoading = true;
+    sendBtn.disabled = true;
+    showTyping();
+
+    try {
+      const reply = await sendToBackend(text);
+      hideTyping();
+      appendMessage(reply, "bot");
+      conversation.push({ role: "assistant", content: reply });
+    } catch (err) {
+      hideTyping();
+      appendMessage(
+        "Maazrat, abhi reply generate nahi ho saka. Thodi der baad dobara koshish karein ya direct shayankamran7@gmail.com par contact karein.",
+        "error"
+      );
+      console.error("[Shayan Chatbot]", err);
+    } finally {
+      isLoading = false;
+      sendBtn.disabled = false;
+    }
+  }
+
+  function openChat() {
+    win.classList.remove("opacity-0", "translate-y-4", "scale-[0.97]", "pointer-events-none");
+    win.classList.add("opacity-100", "translate-y-0", "scale-100", "pointer-events-auto");
+    if (!hasOpenedOnce) {
+      appendMessage(CONFIG.welcomeMessage, "bot");
+      hasOpenedOnce = true;
+    }
+    input.focus();
+  }
+
+  function closeChat() {
+    win.classList.add("opacity-0", "translate-y-4", "scale-[0.97]", "pointer-events-none");
+    win.classList.remove("opacity-100", "translate-y-0", "scale-100", "pointer-events-auto");
+  }
+
+  launcher.addEventListener("click", () => {
+    win.classList.contains("pointer-events-auto") ? closeChat() : openChat();
+  });
+  closeBtn.addEventListener("click", closeChat);
+  sendBtn.addEventListener("click", handleSend);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  });
+  input.addEventListener("input", () => {
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight, 100) + "px";
+  });
+})();
+</script>
 </body>
 </html>
