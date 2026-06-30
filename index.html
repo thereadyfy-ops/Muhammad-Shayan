@@ -766,11 +766,15 @@
   async function sendToBackend(userText) {
     conversation.push({ role: "user", content: userText });
 
-    const res = await fetch(CONFIG.API_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: conversation }),
-    });
+   const response = await fetch(CONFIG.API_ENDPOINT, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        messages: conversation
+    })
+});
 
     if (!res.ok) {
       const errData = await res.json().catch(() => ({}));
